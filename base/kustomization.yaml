@@ -1,0 +1,56 @@
+configMapGenerator:
+- name: environment
+  envs:
+  - .deploy_env
+  - .deploy_env_private
+
+# Extract the variables out of the ConfigMap and into Kustomize variables
+vars:
+- name: ENVIRONMENT
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.ENVIRONMENT
+- name: DEPLOYED_CITY
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.DEPLOYED_CITY
+- name: APP_MODULE
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.APP_MODULE
+- name: HOST
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.HOST
+- name: PORT
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.PORT
+- name: PROJECT_ID
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.PROJECT_ID
+
+commonAnnotations:
+  version: 1.1.0
+resources:
+- deployment.yaml
+- service.yaml
