@@ -1,0 +1,16 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flaskapp-test
+spec:
+  template:
+    spec:
+      containers:
+        - name: flask-kustomize-container
+          env:
+            - name: APP_LOCATION
+              value: Monaco
+            - name: DEPLOYED_CITY
+              value: $(STG_DEPLOYED_CITY)
+            - name: ENVIRONMENT
+              value: $(STG_ENVIRONMENT)

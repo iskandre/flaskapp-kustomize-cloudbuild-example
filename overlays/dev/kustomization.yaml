@@ -1,0 +1,28 @@
+# The `environment` ConfigMap contains all of the environment variables captured by Kustomize
+configMapGenerator:
+- name: environment
+  behavior: replace
+  envs:
+  - .deploy_env
+
+# Extract the variables out of the ConfigMap and into Kustomize variables
+vars:
+- name: STG_ENVIRONMENT
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.ENVIRONMENT
+- name: STG_DEPLOYED_CITY
+  objref:
+    kind: ConfigMap
+    name: environment
+    apiVersion: v1
+  fieldref:
+    fieldpath: data.DEPLOYED_CITY
+bases:
+- ../../base
+patchesStrategicMerge:
+- deployment.yaml
+- custom-env.yaml
