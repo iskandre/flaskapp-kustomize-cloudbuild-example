@@ -1,8 +1,7 @@
 configMapGenerator:
 - name: environment
   envs:
-  - .deploy_env
-  - .deploy_env_private
+    - .deploy_env
 
 # Extract the variables out of the ConfigMap and into Kustomize variables
 vars:
@@ -41,13 +40,6 @@ vars:
     apiVersion: v1
   fieldref:
     fieldpath: data.PORT
-- name: PROJECT_ID
-  objref:
-    kind: ConfigMap
-    name: environment
-    apiVersion: v1
-  fieldref:
-    fieldpath: data.PROJECT_ID
 
 commonAnnotations:
   version: 1.1.0

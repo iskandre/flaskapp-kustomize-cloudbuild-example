@@ -27,7 +27,7 @@ spec:
         type: demo
     spec:
       containers:
-      - image: eu.gcr.io/$(PROJECT_ID)/flask_test/el-flaskapp-cloudbuild:latest
+      - image: eu.gcr.io/[YOUR_PROJECT_ID]/flask_test/el-flaskapp-cloudbuild:latest
         name: flask-kustomize-container
         resources: {}
         imagePullPolicy: Always
